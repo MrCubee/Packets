@@ -11,6 +11,9 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
+/**
+ * @author MrCubee
+ */
 public class CraftGenericPacketPlayOutPlayerInfo implements GenericPacketPlayOutPlayerInfo {
 
     private PacketPlayOutPlayerInfo.EnumPlayerInfoAction action;

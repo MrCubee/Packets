@@ -7,6 +7,9 @@ import net.minecraft.server.v1_8_R3.PacketPlayOutEntityDestroy;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
+/**
+ * @author MrCubee
+ */
 public class CraftGenericPacketPlayOutEntityDestroy implements GenericPacketPlayOutEntityDestroy {
 
     private final PacketPlayOutEntityDestroy packet;

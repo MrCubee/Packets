@@ -11,6 +11,9 @@ import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
+/**
+ * @author MrCubee
+ */
 public class CraftGenericPacketPlayOutNamedEntitySpawn implements GenericPacketPlayOutNamedEntitySpawn {
 
     private final PacketPlayOutNamedEntitySpawn packet;

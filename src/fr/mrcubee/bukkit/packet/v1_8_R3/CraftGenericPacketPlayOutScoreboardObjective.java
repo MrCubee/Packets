@@ -10,6 +10,9 @@ import net.minecraft.server.v1_8_R3.PacketPlayOutScoreboardObjective;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
+/**
+ * @author MrCubee
+ */
 public class CraftGenericPacketPlayOutScoreboardObjective implements GenericPacketPlayOutScoreboardObjective {
 
     private final PacketPlayOutScoreboardObjective packet;

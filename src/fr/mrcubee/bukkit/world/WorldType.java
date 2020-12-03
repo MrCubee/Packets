@@ -1,5 +1,8 @@
 package fr.mrcubee.bukkit.world;
 
+/**
+ * @author MrCubee
+ */
 public enum WorldType {
     NORMAL,
     FLAT,

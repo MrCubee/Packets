@@ -5,6 +5,9 @@ import fr.mrcubee.bukkit.Versions;
 import fr.mrcubee.util.Reflection;
 import org.bukkit.entity.Player;
 
+/**
+ * @author MrCubee
+ */
 public class PlayerUtils {
 
     private static Class<?> getCurrentClass() {
@@ -37,5 +40,4 @@ public class PlayerUtils {
             return false;
         return (boolean) Reflection.executeStaticMethod(clazz, null, "setGameProfile", new Class[] {Player.class}, player);
     }
-
 }

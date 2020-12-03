@@ -11,6 +11,9 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 
+/**
+ * @author MrCubee
+ */
 public class CraftGenericPacketPlayOutScoreboardTeam implements GenericPacketPlayOutScoreboardTeam {
 
     private final PacketPlayOutScoreboardTeam packet;

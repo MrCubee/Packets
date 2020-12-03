@@ -6,6 +6,9 @@ import net.minecraft.server.v1_8_R3.EntityHuman;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
+/**
+ * @author MrCubee
+ */
 public class PlayerUtils {
 
     public static GameProfile getGameProfile(Player player) {
@@ -22,5 +25,4 @@ public class PlayerUtils {
         entityHuman = ((CraftPlayer) player).getHandle();
         return Reflection.setValue(entityHuman, "bH", gameProfile);
     }
-
 }

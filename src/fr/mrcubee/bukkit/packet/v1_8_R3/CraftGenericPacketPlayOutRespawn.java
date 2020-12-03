@@ -12,6 +12,9 @@ import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 
+/**
+ * @author MrCubee
+ */
 public class CraftGenericPacketPlayOutRespawn implements GenericPacketPlayOutRespawn {
 
     private final PacketPlayOutRespawn packet;

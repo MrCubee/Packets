@@ -5,6 +5,9 @@ import fr.mrcubee.bukkit.scoreboard.ObjectiveAction;
 import fr.mrcubee.bukkit.scoreboard.ObjectiveFormat;
 import org.bukkit.Bukkit;
 
+/**
+ * @author MrCubee
+ */
 public interface GenericPacketPlayOutScoreboardObjective extends GenericPacket {
 
     boolean setObjectiveName(String name);

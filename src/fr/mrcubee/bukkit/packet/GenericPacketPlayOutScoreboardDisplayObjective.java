@@ -3,6 +3,9 @@ package fr.mrcubee.bukkit.packet;
 import fr.mrcubee.bukkit.Packets;
 import fr.mrcubee.bukkit.scoreboard.ObjectiveLocation;
 
+/**
+ * @author MrCubee
+ */
 public interface GenericPacketPlayOutScoreboardDisplayObjective extends GenericPacket {
 
     boolean setObjectiveName(String name);

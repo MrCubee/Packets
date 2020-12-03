@@ -2,6 +2,9 @@ package fr.mrcubee.bukkit;
 
 import fr.mrcubee.bukkit.packet.GenericPacket;
 
+/**
+ * @author MrCubee
+ */
 public enum Packets {
 
     PLAY_IN_ABILITIES("PacketPlayInAbilities"),

@@ -3,6 +3,9 @@ package fr.mrcubee.bukkit.packet;
 import fr.mrcubee.bukkit.Packets;
 import fr.mrcubee.bukkit.scoreboard.ScoreAction;
 
+/**
+ * @author MrCubee
+ */
 public interface GenericPacketPlayOutScoreboardScore extends GenericPacket {
 
     boolean setPlayerName(String name);

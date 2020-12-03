@@ -5,6 +5,9 @@ import fr.mrcubee.bukkit.scoreboard.TeamNameTagVisibility;
 
 import java.util.List;
 
+/**
+ * @author MrCubee
+ */
 public interface GenericPacketPlayOutScoreboardTeam extends GenericPacket {
 
     boolean setName(String name);

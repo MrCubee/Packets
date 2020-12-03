@@ -4,6 +4,9 @@ import fr.mrcubee.bukkit.Packets;
 import fr.mrcubee.bukkit.player.PlayerInfoAction;
 import org.bukkit.entity.HumanEntity;
 
+/**
+ * @author MrCubee
+ */
 public interface GenericPacketPlayOutPlayerInfo extends GenericPacket {
 
     boolean setAction(PlayerInfoAction playerInfoAction);

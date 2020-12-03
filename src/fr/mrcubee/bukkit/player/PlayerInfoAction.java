@@ -1,5 +1,8 @@
 package fr.mrcubee.bukkit.player;
 
+/**
+ * @author MrCubee
+ */
 public enum PlayerInfoAction {
     ADD_PLAYER,
     UPDATE_GAME_MODE,

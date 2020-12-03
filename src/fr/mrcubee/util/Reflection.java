@@ -5,6 +5,9 @@ import com.mysql.jdbc.StringUtils;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+/**
+ * @author MrCubee
+ */
 public class Reflection {
 
     public static Object executeStaticMethod(Class<?> clazz, Object instance, String methodName, Class<?>[] parameters, Object... objects) {

@@ -2,6 +2,9 @@ package fr.mrcubee.bukkit.packet;
 
 import fr.mrcubee.bukkit.Packets;
 
+/**
+ * @author MrCubee
+ */
 public interface GenericPacketPlayOutEntityDestroy extends GenericPacket {
 
     boolean setEntityID(int... id);

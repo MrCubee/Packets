@@ -5,6 +5,9 @@ import org.bukkit.entity.HumanEntity;
 
 import java.util.UUID;
 
+/**
+ * @author MrCubee
+ */
 public interface GenericPacketPlayOutNamedEntitySpawn extends GenericPacket {
     boolean setNamedEntityID(int id);
     boolean setGameProfileID(UUID uuid);

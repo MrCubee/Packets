@@ -6,6 +6,9 @@ import fr.mrcubee.bukkit.world.GameMode;
 import fr.mrcubee.bukkit.world.WorldType;
 import org.bukkit.entity.HumanEntity;
 
+/**
+ * @author MrCubee
+ */
 public interface GenericPacketPlayOutRespawn extends GenericPacket {
 
     boolean setDimensionID(int id);

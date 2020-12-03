@@ -2,6 +2,9 @@ package fr.mrcubee.bukkit;
 
 import org.bukkit.Bukkit;
 
+/**
+ * @author MrCubee
+ */
 public enum Versions {
 
     v1_7_R4(5),
