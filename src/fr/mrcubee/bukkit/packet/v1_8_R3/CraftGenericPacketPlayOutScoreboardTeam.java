@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class CraftGenericPacketPlayOutScoreboardTeam implements GenericPacketPlayOutScoreboardTeam {
 
-    private final PacketPlayOutScoreboardTeam packet;
+    private PacketPlayOutScoreboardTeam packet;
 
     public CraftGenericPacketPlayOutScoreboardTeam() {
         this.packet = new PacketPlayOutScoreboardTeam();
@@ -26,28 +26,28 @@ public class CraftGenericPacketPlayOutScoreboardTeam implements GenericPacketPla
     public boolean setName(String name) {
         if (name == null)
             return false;
-        return Reflection.setValue(packet, "a", name);
+        return Reflection.setValue(this.packet, "a", name);
     }
 
     @Override
     public boolean setDisplayName(String name) {
         if (name == null)
             return false;
-        return Reflection.setValue(packet, "b", name);
+        return Reflection.setValue(this.packet, "b", name);
     }
 
     @Override
     public boolean setTeamPrefix(String prefix) {
         if (prefix == null)
             return false;
-        return Reflection.setValue(packet, "c", prefix);
+        return Reflection.setValue(this.packet, "c", prefix);
     }
 
     @Override
     public boolean setTeamSuffix(String suffix) {
         if (suffix == null)
             return false;
-        return Reflection.setValue(packet, "d", suffix);
+        return Reflection.setValue(this.packet, "d", suffix);
     }
 
     @Override
@@ -56,27 +56,64 @@ public class CraftGenericPacketPlayOutScoreboardTeam implements GenericPacketPla
             return false;
         switch (option) {
             case ALWAYS:
-                return Reflection.setValue(packet, "e", ScoreboardTeamBase.EnumNameTagVisibility.ALWAYS.e);
+                return Reflection.setValue(this.packet, "e", ScoreboardTeamBase.EnumNameTagVisibility.ALWAYS.e);
             case NEVER:
-                return Reflection.setValue(packet, "e", ScoreboardTeamBase.EnumNameTagVisibility.NEVER.e);
+                return Reflection.setValue(this.packet, "e", ScoreboardTeamBase.EnumNameTagVisibility.NEVER.e);
             case HIDE_FOR_OTHER_TEAMS:
-                return Reflection.setValue(packet, "e", ScoreboardTeamBase.EnumNameTagVisibility.HIDE_FOR_OTHER_TEAMS.e);
+                return Reflection.setValue(this.packet, "e", ScoreboardTeamBase.EnumNameTagVisibility.HIDE_FOR_OTHER_TEAMS.e);
             case HIDE_FOR_OWN_TEAM:
-                return Reflection.setValue(packet, "e", ScoreboardTeamBase.EnumNameTagVisibility.HIDE_FOR_OWN_TEAM.e);
+                return Reflection.setValue(this.packet, "e", ScoreboardTeamBase.EnumNameTagVisibility.HIDE_FOR_OWN_TEAM.e);
         }
         return false;
     }
 
     @Override
     public List<String> getMembersNameList() {
-        return (List<String>) Reflection.getValue(packet, "g");
+        return (List<String>) Reflection.getValue(this.packet, "g");
+    }
+
+    @Override
+    public String getName() {
+        return (String) Reflection.getValue(this.packet, "a");
+    }
+
+    @Override
+    public String getDisplayName() {
+        return (String) Reflection.getValue(this.packet, "b");
+    }
+
+    @Override
+    public String getTeamPrefix() {
+        return (String) Reflection.getValue(this.packet, "c");
+    }
+
+    @Override
+    public String getTeamSuffix() {
+        return (String) Reflection.getValue(this.packet, "d");
+    }
+
+    @Override
+    public TeamNameTagVisibility getTeamNameTagVisibility() {
+        String result = (String) Reflection.getValue(this.packet, "e");
+
+        if (result == null)
+            return null;
+        if (ScoreboardTeamBase.EnumNameTagVisibility.ALWAYS.e.equals(result))
+            return TeamNameTagVisibility.ALWAYS;
+        else if (ScoreboardTeamBase.EnumNameTagVisibility.NEVER.e.equals(result))
+            return TeamNameTagVisibility.NEVER;
+        else if (ScoreboardTeamBase.EnumNameTagVisibility.HIDE_FOR_OTHER_TEAMS.e.equals(result))
+            return TeamNameTagVisibility.HIDE_FOR_OTHER_TEAMS;
+        else if (ScoreboardTeamBase.EnumNameTagVisibility.HIDE_FOR_OWN_TEAM.e.equals(result))
+            return TeamNameTagVisibility.HIDE_FOR_OWN_TEAM;
+        return null;
     }
 
     @Override
     public boolean sendPlayer(Player player) {
         if (player == null || !player.isOnline())
             return false;
-        ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
+        ((CraftPlayer) player).getHandle().playerConnection.sendPacket(this.packet);
         return true;
     }
 

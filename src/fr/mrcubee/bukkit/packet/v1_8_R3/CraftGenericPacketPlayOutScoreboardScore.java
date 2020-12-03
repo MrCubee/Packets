@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
  */
 public class CraftGenericPacketPlayOutScoreboardScore implements GenericPacketPlayOutScoreboardScore {
 
-    private final PacketPlayOutScoreboardScore packet;
+    private PacketPlayOutScoreboardScore packet;
 
     public CraftGenericPacketPlayOutScoreboardScore() {
         this.packet = new PacketPlayOutScoreboardScore();
@@ -23,19 +23,19 @@ public class CraftGenericPacketPlayOutScoreboardScore implements GenericPacketPl
     public boolean setPlayerName(String name) {
         if (name == null)
             return false;
-        return Reflection.setValue(packet, "a", name);
+        return Reflection.setValue(this.packet, "a", name);
     }
 
     @Override
     public boolean setObjectiveName(String name) {
         if (name == null)
             return false;
-        return Reflection.setValue(packet, "b", name);
+        return Reflection.setValue(this.packet, "b", name);
     }
 
     @Override
     public boolean setScoreValue(int value) {
-        return Reflection.setValue(packet, "c", value);
+        return Reflection.setValue(this.packet, "c", value);
     }
 
     @Override
@@ -44,18 +44,52 @@ public class CraftGenericPacketPlayOutScoreboardScore implements GenericPacketPl
             return false;
         switch (scoreAction) {
             case CHANGE:
-                return Reflection.setValue(packet, "d", PacketPlayOutScoreboardScore.EnumScoreboardAction.CHANGE);
+                return Reflection.setValue(this.packet, "d", PacketPlayOutScoreboardScore.EnumScoreboardAction.CHANGE);
             case REMOVE:
-                return Reflection.setValue(packet, "d", PacketPlayOutScoreboardScore.EnumScoreboardAction.REMOVE);
+                return Reflection.setValue(this.packet, "d", PacketPlayOutScoreboardScore.EnumScoreboardAction.REMOVE);
         }
         return false;
+    }
+
+    @Override
+    public String getPlayerName() {
+        return (String) Reflection.getValue(this.packet, "a");
+    }
+
+    @Override
+    public String getObjectiveName() {
+        return (String) Reflection.getValue(this.packet, "b");
+    }
+
+    @Override
+    public int getScoreValue() {
+        Object result = Reflection.getValue(this.packet, "c");
+
+        if (result == null)
+            return 0;
+        return (int) result;
+    }
+
+    @Override
+    public ScoreAction getScoreAction() {
+        PacketPlayOutScoreboardScore.EnumScoreboardAction result = (PacketPlayOutScoreboardScore.EnumScoreboardAction) Reflection.getValue(this.packet, "c");
+
+        if (result == null)
+            return null;
+        switch (result) {
+            case CHANGE:
+                return ScoreAction.CHANGE;
+            case REMOVE:
+                return ScoreAction.REMOVE;
+        }
+        return null;
     }
 
     @Override
     public boolean sendPlayer(Player player) {
         if (player == null || !player.isOnline())
             return false;
-        ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
+        ((CraftPlayer) player).getHandle().playerConnection.sendPacket(this.packet);
         return true;
     }
 

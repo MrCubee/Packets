@@ -2,39 +2,34 @@ package fr.mrcubee.bukkit.packet;
 
 import fr.mrcubee.bukkit.Packets;
 import org.bukkit.Location;
-import org.bukkit.entity.HumanEntity;
-
-import java.util.UUID;
+import org.bukkit.entity.Entity;
 
 /**
  * @author MrCubee
  */
-public interface GenericPacketPlayOutNamedEntitySpawn extends GenericOutPacket {
+public interface GenericPacketPlayOutEntityTeleport extends GenericOutPacket {
 
-    boolean setNamedEntityID(int id);
-    boolean setGameProfileID(UUID uuid);
+    boolean setEntityID(int id);
     boolean setLocationX(double x);
     boolean setLocationY(double y);
     boolean setLocationZ(double z);
     boolean setYaw(float yaw);
     boolean setPitch(float pitch);
     boolean fillLocation(Location location);
-    boolean setItemInHandID(int id);
-    boolean setNamedEntityDataWatcher(HumanEntity entity);
-    boolean fillAllFromPlayer(HumanEntity entity);
+    boolean setOnTheGround(boolean onGround);
+    boolean fillAllFromEntity(Entity entity);
 
-    int getNamedEntityID();
-    UUID getGameProfileID();
+    int getEntityID();
     double getLocationX();
     double getLocationY();
     double getLocationZ();
     float getYaw();
     float getPitch();
     Location getLocation();
-    int getItemInHandID();
+    boolean isOnTheGround();
 
-    public static GenericPacketPlayOutNamedEntitySpawn create() {
-        Class<?> clazz = Packets.PLAY_OUT_NAMED_ENTITY_SPAWN.getGenericPacketClass();
+    public static GenericPacketPlayOutEntityTeleport create() {
+        Class<?> clazz = Packets.PLAY_OUT_ENTITY_TELEPORT.getGenericPacketClass();
         Object result = null;
 
         if (clazz == null)
@@ -42,6 +37,6 @@ public interface GenericPacketPlayOutNamedEntitySpawn extends GenericOutPacket {
         try {
             result = clazz.newInstance();
         } catch (Exception ignored) {}
-        return (GenericPacketPlayOutNamedEntitySpawn) result;
+        return (GenericPacketPlayOutEntityTeleport) result;
     }
 }

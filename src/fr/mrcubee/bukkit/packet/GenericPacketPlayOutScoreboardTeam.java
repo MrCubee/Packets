@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * @author MrCubee
  */
-public interface GenericPacketPlayOutScoreboardTeam extends GenericPacket {
+public interface GenericPacketPlayOutScoreboardTeam extends GenericOutPacket {
 
     boolean setName(String name);
     boolean setDisplayName(String name);
@@ -17,8 +17,14 @@ public interface GenericPacketPlayOutScoreboardTeam extends GenericPacket {
     boolean setTeamNameTagVisibility(TeamNameTagVisibility option);
     List<String> getMembersNameList();
 
+    String getName();
+    String getDisplayName();
+    String getTeamPrefix();
+    String getTeamSuffix();
+    TeamNameTagVisibility getTeamNameTagVisibility();
+
     public static GenericPacketPlayOutScoreboardTeam create() {
-        Class<?> clazz = Packets.PLAY_OUT_SCOREBOARD_TEAM.getPacketClass();
+        Class<?> clazz = Packets.PLAY_OUT_SCOREBOARD_TEAM.getGenericPacketClass();
         Object result = null;
 
         if (clazz == null)

@@ -7,14 +7,14 @@ import org.bukkit.entity.HumanEntity;
 /**
  * @author MrCubee
  */
-public interface GenericPacketPlayOutPlayerInfo extends GenericPacket {
+public interface GenericPacketPlayOutPlayerInfo extends GenericOutPacket {
 
     boolean setAction(PlayerInfoAction playerInfoAction);
     boolean addPlayer(HumanEntity... humansEntity);
     void clear();
 
     public static GenericPacketPlayOutPlayerInfo create() {
-        Class<?> clazz = Packets.PLAY_OUT_PLAYER_INFO.getPacketClass();
+        Class<?> clazz = Packets.PLAY_OUT_PLAYER_INFO.getGenericPacketClass();
         Object result = null;
 
         if (clazz == null)

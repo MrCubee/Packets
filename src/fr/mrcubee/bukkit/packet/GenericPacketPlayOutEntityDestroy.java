@@ -5,12 +5,14 @@ import fr.mrcubee.bukkit.Packets;
 /**
  * @author MrCubee
  */
-public interface GenericPacketPlayOutEntityDestroy extends GenericPacket {
+public interface GenericPacketPlayOutEntityDestroy extends GenericOutPacket {
 
     boolean setEntityID(int... id);
 
+    int[] getEntityID();
+
     public static GenericPacketPlayOutEntityDestroy create() {
-        Class<?> clazz = Packets.PLAY_OUT_ENTITY_DESTROY.getPacketClass();
+        Class<?> clazz = Packets.PLAY_OUT_ENTITY_DESTROY.getGenericPacketClass();
         Object result = null;
 
         if (clazz == null)

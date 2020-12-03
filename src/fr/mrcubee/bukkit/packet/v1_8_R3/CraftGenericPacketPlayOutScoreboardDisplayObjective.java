@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
  */
 public class CraftGenericPacketPlayOutScoreboardDisplayObjective implements GenericPacketPlayOutScoreboardDisplayObjective {
 
-    private final PacketPlayOutScoreboardDisplayObjective packet;
+    private PacketPlayOutScoreboardDisplayObjective packet;
 
     public CraftGenericPacketPlayOutScoreboardDisplayObjective() {
         this.packet = new PacketPlayOutScoreboardDisplayObjective();
@@ -23,21 +23,51 @@ public class CraftGenericPacketPlayOutScoreboardDisplayObjective implements Gene
     public boolean setObjectiveLocation(ObjectiveLocation location) {
         if (location == null)
             return false;
-        return Reflection.setValue(packet, "a", location.ordinal());
+        switch (location) {
+            case LIST:
+                return Reflection.setValue(this.packet, "a", 0);
+            case SIDEBAR:
+                return Reflection.setValue(this.packet, "a", 1);
+            case BELOW_NAME:
+                return Reflection.setValue(this.packet, "a", 2);
+        }
+        return false;
     }
 
     @Override
     public boolean setObjectiveName(String name) {
         if (name == null)
             return false;
-        return Reflection.setValue(packet, "b", name);
+        return Reflection.setValue(this.packet, "b", name);
+    }
+
+    @Override
+    public ObjectiveLocation getObjectiveLocation() {
+        Object result = Reflection.getValue(this.packet, "a");
+
+        if (result == null)
+            return null;
+        switch ((int) result) {
+            case 0:
+                return ObjectiveLocation.LIST;
+            case 1:
+                return ObjectiveLocation.SIDEBAR;
+            case 2:
+                return ObjectiveLocation.BELOW_NAME;
+        }
+        return null;
+    }
+
+    @Override
+    public String getObjectiveName() {
+        return (String) Reflection.getValue(this.packet, "b");
     }
 
     @Override
     public boolean sendPlayer(Player player) {
         if (player == null || !player.isOnline())
             return false;
-        ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
+        ((CraftPlayer) player).getHandle().playerConnection.sendPacket(this.packet);
         return true;
     }
 

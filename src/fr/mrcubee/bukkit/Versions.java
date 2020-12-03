@@ -29,18 +29,22 @@ public enum Versions {
         return this.number;
     }
 
-    public static Versions getFromName(String name) {
-        Versions[] values = Versions.values();
+    public static Versions fromString(String str) {
+        Versions[] versions;
 
-        for (Versions version : values)
-            if (version.toString().equalsIgnoreCase(name))
+        if (str == null)
+            return null;
+        versions = Versions.values();
+        for (Versions version : versions) {
+            if (version.toString().equalsIgnoreCase(str))
                 return version;
+        }
         return null;
     }
 
     public static Versions getCurrent() {
         String packageName = Bukkit.getServer().getClass().getPackage().getName();
 
-        return getFromName(packageName.substring(packageName.lastIndexOf('.') + 1));
+        return fromString(packageName.substring(packageName.lastIndexOf('.') + 1));
     }
 }
