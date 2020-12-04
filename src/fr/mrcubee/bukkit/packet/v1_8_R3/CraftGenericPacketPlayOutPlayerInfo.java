@@ -14,7 +14,7 @@ import java.util.ArrayList;
 /**
  * @author MrCubee
  */
-public class CraftGenericPacketPlayOutPlayerInfo implements GenericPacketPlayOutPlayerInfo {
+public class CraftGenericPacketPlayOutPlayerInfo extends CraftGenericOutPacket implements GenericPacketPlayOutPlayerInfo {
 
     private PacketPlayOutPlayerInfo.EnumPlayerInfoAction action;
     private final ArrayList<EntityPlayer> players;

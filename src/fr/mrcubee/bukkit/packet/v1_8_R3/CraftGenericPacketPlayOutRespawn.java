@@ -11,16 +11,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.craftbukkit.v1_8_R3.CraftServer;
 import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftHumanEntity;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.HumanEntity;
-import org.bukkit.entity.Player;
 
 /**
  * @author MrCubee
  */
-public class CraftGenericPacketPlayOutRespawn implements GenericPacketPlayOutRespawn {
-
-    private PacketPlayOutRespawn packet;
+public class CraftGenericPacketPlayOutRespawn extends CraftGenericOutPacket implements GenericPacketPlayOutRespawn {
 
     public CraftGenericPacketPlayOutRespawn() {
         this.packet = new PacketPlayOutRespawn();
@@ -203,14 +199,6 @@ public class CraftGenericPacketPlayOutRespawn implements GenericPacketPlayOutRes
         else if (worldType.equals(net.minecraft.server.v1_8_R3.WorldType.NORMAL_1_1))
             return WorldType.NORMAL_1_1;
         return null;
-    }
-
-    @Override
-    public boolean sendPlayer(Player player) {
-        if (player == null || !player.isOnline())
-            return false;
-        ((CraftPlayer) player).getHandle().playerConnection.sendPacket(this.packet);
-        return true;
     }
 
     @Override

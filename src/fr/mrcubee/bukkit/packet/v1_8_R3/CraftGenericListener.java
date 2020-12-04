@@ -25,19 +25,19 @@ public class CraftGenericListener extends GenericListener {
     @Override
     public void channelRead(ChannelHandlerContext context, Object packetObj) throws Exception {
         Packets packetType = Packets.getFromPacketClass(packetObj.getClass());
-        GenericInPacket genericOutPacket;
+        GenericInPacket genericInPacket;
         PacketReceiveEvent event;
 
         if (packetType == null || packetType.getDirection() != PacketDirection.IN) {
             super.channelRead(context, packetObj);
             return;
         }
-        genericOutPacket = (GenericInPacket) packetType.createPacket();
-        if (genericOutPacket == null || !Reflection.setValue(packetType.getGenericPacketClass(), genericOutPacket, "packet", packetObj)) {
+        genericInPacket = (GenericInPacket) packetType.createPacket();
+        if (genericInPacket == null || !Reflection.setValue(packetType.getGenericPacketClass(), genericInPacket, "packet", packetObj)) {
             super.channelRead(context, packetObj);
             return;
         }
-        event = PacketReceiveEvent.createAndCall(getManager(), getPlayer(), genericOutPacket);
+        event = PacketReceiveEvent.createAndCall(getManager(), getPlayer(), genericInPacket);
         if (event != null && event.isCancelled())
             return;
         super.channelRead(context, packetObj);

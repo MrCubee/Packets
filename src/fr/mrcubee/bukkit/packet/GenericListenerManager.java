@@ -22,6 +22,12 @@ public abstract class GenericListenerManager {
     public abstract boolean addPlayer(Player player);
     public abstract boolean removePlayer(Player player);
 
+    public boolean containPlayer(Player player) {
+        if (player == null)
+            return false;
+        return this.listeners.containsKey(player);
+    }
+
     protected Map<Player, GenericListener> getListeners() {
         return this.listeners;
     }

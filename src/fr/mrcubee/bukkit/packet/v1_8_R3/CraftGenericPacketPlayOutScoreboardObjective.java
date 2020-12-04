@@ -7,15 +7,11 @@ import fr.mrcubee.bukkit.scoreboard.ObjectiveFormat;
 import fr.mrcubee.util.Reflection;
 import net.minecraft.server.v1_8_R3.IScoreboardCriteria;
 import net.minecraft.server.v1_8_R3.PacketPlayOutScoreboardObjective;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
-import org.bukkit.entity.Player;
 
 /**
  * @author MrCubee
  */
-public class CraftGenericPacketPlayOutScoreboardObjective implements GenericPacketPlayOutScoreboardObjective {
-
-    private PacketPlayOutScoreboardObjective packet;
+public class CraftGenericPacketPlayOutScoreboardObjective extends CraftGenericOutPacket implements GenericPacketPlayOutScoreboardObjective {
 
     public CraftGenericPacketPlayOutScoreboardObjective() {
         packet = new PacketPlayOutScoreboardObjective();
@@ -103,14 +99,6 @@ public class CraftGenericPacketPlayOutScoreboardObjective implements GenericPack
                 return ObjectiveAction.UPDATE;
         }
         return null;
-    }
-
-    @Override
-    public boolean sendPlayer(Player player) {
-        if (player == null || !player.isOnline())
-            return false;
-        ((CraftPlayer) player).getHandle().playerConnection.sendPacket(this.packet);
-        return true;
     }
 
     @Override

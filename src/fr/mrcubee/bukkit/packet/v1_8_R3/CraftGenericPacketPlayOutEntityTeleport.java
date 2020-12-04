@@ -7,16 +7,12 @@ import net.minecraft.server.v1_8_R3.MathHelper;
 import net.minecraft.server.v1_8_R3.PacketPlayOutEntityTeleport;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftEntity;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
 
 /**
  * @author MrCubee
  */
-public class CraftGenericPacketPlayOutEntityTeleport implements GenericPacketPlayOutEntityTeleport {
-
-    private PacketPlayOutEntityTeleport packet;
+public class CraftGenericPacketPlayOutEntityTeleport extends CraftGenericOutPacket implements GenericPacketPlayOutEntityTeleport {
 
     public CraftGenericPacketPlayOutEntityTeleport() {
         this.packet = new PacketPlayOutEntityTeleport();
@@ -53,7 +49,7 @@ public class CraftGenericPacketPlayOutEntityTeleport implements GenericPacketPla
     }
 
     @Override
-    public boolean fillLocation(Location location) {
+    public boolean fillFromLocation(Location location) {
         boolean result;
 
         if (location == null)
@@ -155,14 +151,6 @@ public class CraftGenericPacketPlayOutEntityTeleport implements GenericPacketPla
         if (result == null)
             return false;
         return (boolean) result;
-    }
-
-    @Override
-    public boolean sendPlayer(Player player) {
-        if (player == null || !player.isOnline())
-            return false;
-        ((CraftPlayer) player).getHandle().playerConnection.sendPacket(this.packet);
-        return true;
     }
 
     @Override

@@ -5,15 +5,11 @@ import fr.mrcubee.bukkit.packet.GenericPacketPlayOutScoreboardScore;
 import fr.mrcubee.bukkit.scoreboard.ScoreAction;
 import fr.mrcubee.util.Reflection;
 import net.minecraft.server.v1_8_R3.PacketPlayOutScoreboardScore;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
-import org.bukkit.entity.Player;
 
 /**
  * @author MrCubee
  */
-public class CraftGenericPacketPlayOutScoreboardScore implements GenericPacketPlayOutScoreboardScore {
-
-    private PacketPlayOutScoreboardScore packet;
+public class CraftGenericPacketPlayOutScoreboardScore extends CraftGenericOutPacket implements GenericPacketPlayOutScoreboardScore {
 
     public CraftGenericPacketPlayOutScoreboardScore() {
         this.packet = new PacketPlayOutScoreboardScore();
@@ -83,14 +79,6 @@ public class CraftGenericPacketPlayOutScoreboardScore implements GenericPacketPl
                 return ScoreAction.REMOVE;
         }
         return null;
-    }
-
-    @Override
-    public boolean sendPlayer(Player player) {
-        if (player == null || !player.isOnline())
-            return false;
-        ((CraftPlayer) player).getHandle().playerConnection.sendPacket(this.packet);
-        return true;
     }
 
     @Override

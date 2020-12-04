@@ -18,7 +18,7 @@ public interface GenericPacketPlayOutNamedEntitySpawn extends GenericOutPacket {
     boolean setLocationZ(double z);
     boolean setYaw(float yaw);
     boolean setPitch(float pitch);
-    boolean fillLocation(Location location);
+    boolean fillFromLocation(Location location);
     boolean setItemInHandID(int id);
     boolean setNamedEntityDataWatcher(HumanEntity entity);
     boolean fillAllFromPlayer(HumanEntity entity);

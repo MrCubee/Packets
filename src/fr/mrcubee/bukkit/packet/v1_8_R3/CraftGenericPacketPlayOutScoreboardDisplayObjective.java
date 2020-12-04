@@ -5,15 +5,11 @@ import fr.mrcubee.bukkit.packet.GenericPacketPlayOutScoreboardDisplayObjective;
 import fr.mrcubee.bukkit.scoreboard.ObjectiveLocation;
 import fr.mrcubee.util.Reflection;
 import net.minecraft.server.v1_8_R3.PacketPlayOutScoreboardDisplayObjective;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
-import org.bukkit.entity.Player;
 
 /**
  * @author MrCubee
  */
-public class CraftGenericPacketPlayOutScoreboardDisplayObjective implements GenericPacketPlayOutScoreboardDisplayObjective {
-
-    private PacketPlayOutScoreboardDisplayObjective packet;
+public class CraftGenericPacketPlayOutScoreboardDisplayObjective extends CraftGenericOutPacket implements GenericPacketPlayOutScoreboardDisplayObjective {
 
     public CraftGenericPacketPlayOutScoreboardDisplayObjective() {
         this.packet = new PacketPlayOutScoreboardDisplayObjective();
@@ -61,14 +57,6 @@ public class CraftGenericPacketPlayOutScoreboardDisplayObjective implements Gene
     @Override
     public String getObjectiveName() {
         return (String) Reflection.getValue(this.packet, "b");
-    }
-
-    @Override
-    public boolean sendPlayer(Player player) {
-        if (player == null || !player.isOnline())
-            return false;
-        ((CraftPlayer) player).getHandle().playerConnection.sendPacket(this.packet);
-        return true;
     }
 
     @Override

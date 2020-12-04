@@ -15,7 +15,7 @@ public interface GenericPacketPlayOutEntityTeleport extends GenericOutPacket {
     boolean setLocationZ(double z);
     boolean setYaw(float yaw);
     boolean setPitch(float pitch);
-    boolean fillLocation(Location location);
+    boolean fillFromLocation(Location location);
     boolean setOnTheGround(boolean onGround);
     boolean fillAllFromEntity(Entity entity);
 

@@ -6,18 +6,14 @@ import fr.mrcubee.util.Reflection;
 import net.minecraft.server.v1_8_R3.*;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftHumanEntity;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.HumanEntity;
-import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
 /**
  * @author MrCubee
  */
-public class CraftGenericPacketPlayOutNamedEntitySpawn implements GenericPacketPlayOutNamedEntitySpawn {
-
-    private PacketPlayOutNamedEntitySpawn packet;
+public class CraftGenericPacketPlayOutNamedEntitySpawn extends CraftGenericOutPacket implements GenericPacketPlayOutNamedEntitySpawn {
 
     public CraftGenericPacketPlayOutNamedEntitySpawn() {
         this.packet = new PacketPlayOutNamedEntitySpawn();
@@ -61,7 +57,7 @@ public class CraftGenericPacketPlayOutNamedEntitySpawn implements GenericPacketP
     }
 
     @Override
-    public boolean fillLocation(Location location) {
+    public boolean fillFromLocation(Location location) {
         boolean result;
 
         if (location == null)
@@ -184,14 +180,6 @@ public class CraftGenericPacketPlayOutNamedEntitySpawn implements GenericPacketP
         if (result == null)
             return -1;
         return (int) result;
-    }
-
-    @Override
-    public boolean sendPlayer(Player player) {
-        if (player == null || !player.isOnline())
-            return false;
-        ((CraftPlayer) player).getHandle().playerConnection.sendPacket(this.packet);
-        return true;
     }
 
     @Override

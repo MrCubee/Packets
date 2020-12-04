@@ -1,6 +1,5 @@
 package fr.mrcubee.bukkit;
 
-import fr.mrcubee.bukkit.packet.GenericOutPacket;
 import fr.mrcubee.bukkit.packet.GenericPacket;
 
 /**
@@ -155,12 +154,12 @@ public enum Packets {
 
     public GenericPacket createPacket(Versions version) {
         Class<?> clazz = getGenericPacketClass(version);
-        GenericOutPacket genericPacket = null;
+        GenericPacket genericPacket = null;
 
         if (clazz == null)
             return null;
         try {
-            genericPacket = (GenericOutPacket) clazz.newInstance();
+            genericPacket = (GenericPacket) clazz.newInstance();
         } catch (Exception ignored) {}
         return genericPacket;
     }
