@@ -4,13 +4,11 @@ import fr.mrcubee.bukkit.PacketDirection;
 import fr.mrcubee.bukkit.Packets;
 import fr.mrcubee.bukkit.events.PacketReceiveEvent;
 import fr.mrcubee.bukkit.events.PacketSendEvent;
-import fr.mrcubee.bukkit.packet.GenericInPacket;
 import fr.mrcubee.bukkit.packet.GenericListener;
 import fr.mrcubee.bukkit.packet.GenericListenerManager;
-import fr.mrcubee.bukkit.packet.GenericOutPacket;
-import fr.mrcubee.util.Reflection;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelPromise;
+import net.minecraft.server.v1_8_R3.Packet;
 import org.bukkit.entity.Player;
 
 /**
@@ -25,18 +23,19 @@ public class CraftGenericListener extends GenericListener {
     @Override
     public void channelRead(ChannelHandlerContext context, Object packetObj) throws Exception {
         Packets packetType = Packets.getFromPacketClass(packetObj.getClass());
-        GenericInPacket genericInPacket;
+        CraftGenericInPacket genericInPacket;
         PacketReceiveEvent event;
 
         if (packetType == null || packetType.getDirection() != PacketDirection.IN) {
             super.channelRead(context, packetObj);
             return;
         }
-        genericInPacket = (GenericInPacket) packetType.createPacket();
-        if (genericInPacket == null || !Reflection.setValue(packetType.getGenericPacketClass(), genericInPacket, "packet", packetObj)) {
+        genericInPacket = (CraftGenericInPacket) packetType.createPacket();
+        if (genericInPacket == null) {
             super.channelRead(context, packetObj);
             return;
         }
+        genericInPacket.packet = (Packet<?>) packetObj;
         event = PacketReceiveEvent.createAndCall(getManager(), getPlayer(), genericInPacket);
         if (event != null && event.isCancelled())
             return;
@@ -46,18 +45,19 @@ public class CraftGenericListener extends GenericListener {
     @Override
     public void write(ChannelHandlerContext context, Object packetObj, ChannelPromise promise) throws Exception {
         Packets packetType = Packets.getFromPacketClass(packetObj.getClass());
-        GenericOutPacket genericOutPacket;
+        CraftGenericOutPacket genericOutPacket;
         PacketSendEvent event;
 
         if (packetType == null || packetType.getDirection() != PacketDirection.OUT) {
             super.write(context, packetObj, promise);
             return;
         }
-        genericOutPacket = (GenericOutPacket) packetType.createPacket();
-        if (genericOutPacket == null || !Reflection.setValue(packetType.getGenericPacketClass(), genericOutPacket, "packet", packetObj)) {
+        genericOutPacket = (CraftGenericOutPacket) packetType.createPacket();
+        if (genericOutPacket == null) {
             super.write(context, packetObj, promise);
             return;
         }
+        genericOutPacket.packet = (Packet<?>) packetObj;
         event = PacketSendEvent.createAndCall(getManager(), getPlayer(), genericOutPacket);
         if (event != null && event.isCancelled())
             return;

@@ -6,38 +6,44 @@ import io.netty.channel.Channel;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
-import java.util.Map;
-
 /**
  * @author MrCubee
  */
 public class CraftGenericListenerManager extends GenericListenerManager {
 
+    private final String pipeLineNamePrefix;
+
+    public CraftGenericListenerManager(String name) {
+        StringBuilder nameBuilder = new StringBuilder();
+
+        nameBuilder.append("MrCubee_Listener_");
+        nameBuilder.append(name);
+        nameBuilder.append("_");
+        this.pipeLineNamePrefix = nameBuilder.toString();
+    }
+
     @Override
     public boolean addPlayer(Player player) {
-        Map<Player, GenericListener> listeners = getListeners();
         GenericListener genericListener;
 
-        if (player == null || listeners.containsKey(player))
+        if (player == null || this.listeners.containsKey(player))
             return false;
         genericListener = new CraftGenericListener(this, player);
-        listeners.put(player, genericListener);
+        this.listeners.put(player, genericListener);
         ((CraftPlayer) player).getHandle().playerConnection.networkManager.channel.pipeline().addBefore("packet_handler",
-                GenericListenerManager.NAME_PREFIX + player.getName(), genericListener);
+                this.pipeLineNamePrefix + player.getName(), genericListener);
         return true;
     }
 
     @Override
     public boolean removePlayer(Player player) {
-        Map<Player, GenericListener> listeners = getListeners();
-        GenericListener genericListener;
         Channel channel;
 
-        if (player == null || (genericListener = listeners.remove(player)) == null)
+        if (player == null || this.listeners.remove(player) == null)
             return false;
         channel = ((CraftPlayer) player).getHandle().playerConnection.networkManager.channel;
         channel.eventLoop().submit(() -> {
-            channel.pipeline().remove(GenericListenerManager.NAME_PREFIX + player.getName());;
+            channel.pipeline().remove(this.pipeLineNamePrefix + player.getName());;
         });
         return true;
     }

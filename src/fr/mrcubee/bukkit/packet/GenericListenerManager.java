@@ -3,20 +3,19 @@ package fr.mrcubee.bukkit.packet;
 import fr.mrcubee.bukkit.Versions;
 import org.bukkit.entity.Player;
 
-import java.util.HashMap;
+import java.lang.reflect.Constructor;
 import java.util.Map;
+import java.util.WeakHashMap;
 
 /**
  * @author MrCubee
  */
 public abstract class GenericListenerManager {
 
-    protected static final String NAME_PREFIX = "MrCubee_";
-
-    private Map<Player, GenericListener> listeners;
+    protected final Map<Player, GenericListener> listeners;
 
     protected GenericListenerManager() {
-        this.listeners = new HashMap<Player, GenericListener>();
+        this.listeners = new WeakHashMap<Player, GenericListener>();
     }
 
     public abstract boolean addPlayer(Player player);
@@ -28,10 +27,6 @@ public abstract class GenericListenerManager {
         return this.listeners.containsKey(player);
     }
 
-    protected Map<Player, GenericListener> getListeners() {
-        return this.listeners;
-    }
-
     private static Class<?> getGenericListenerManagerClass() {
         Class<?> clazz = null;
 
@@ -41,16 +36,17 @@ public abstract class GenericListenerManager {
         return clazz;
     }
 
-    public static GenericListenerManager create() {
+    public static GenericListenerManager create(String name) {
         Class<?> clazz = getGenericListenerManagerClass();
+        Constructor<?> constructor;
         GenericListenerManager result = null;
 
         if (clazz == null)
             return null;
         try {
-            result = (GenericListenerManager) clazz.newInstance();
+            constructor = (Constructor<?>) clazz.getConstructor(String.class);
+            result = (GenericListenerManager) constructor.newInstance(name);
         } catch (Exception ignored) {}
         return result;
     }
-
 }
