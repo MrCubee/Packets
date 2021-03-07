@@ -16,95 +16,101 @@
     <description>Easily packets' uses</description>
 
     <organization>
-        <name>ArkadGames</name>
-        <url>https://github.com/ArkadGamesNetwork</url>
+        <name>MrCubee</name>
+        <url>https://github.com/MrCubee</url>
     </organization>
 
     <distributionManagement>
         <repository>
-            <id>arkadgames</id>
-            <url>http://nexus.arkadgames.net/repository/minecraft/</url>
+            <id>mrcubee-public</id>
+            <url>http://nexus.mrcubee.net/repository/minecraft/</url>
             <uniqueVersion>false</uniqueVersion>
         </repository>
     </distributionManagement>
 
     <issueManagement>
         <system>github</system>
-        <url>https://github.com/ArkadGamesNetwork/Packets/issues</url>
+        <url>https://github.com/MrCubee/Packets/issues</url>
     </issueManagement>
 
     <repositories>
         <repository>
-            <id>arkadgames</id>
-            <url>http://nexus.arkadgames.net/repository/minecraft/</url>
+            <id>mrcubee-public</id>
+            <url>http://nexus.mrcubee.net/repository/minecraft/</url>
         </repository>
     </repositories>
 
     <dependencies>
         <dependency>
-            <groupId>org.spigotmc..........</groupId>
+            <groupId>org.spigotmc...........</groupId>
             <artifactId>spigot-api</artifactId>
             <version>1.7.10-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.spigotmc.........</groupId>
+            <groupId>org.spigotmc..........</groupId>
             <artifactId>spigot-api</artifactId>
             <version>1.8-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.spigotmc........</groupId>
+            <groupId>org.spigotmc.........</groupId>
             <artifactId>spigot-api</artifactId>
             <version>1.8.3-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.spigotmc.......</groupId>
+            <groupId>org.spigotmc........</groupId>
             <artifactId>spigot-api</artifactId>
             <version>1.8.8-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.spigotmc......</groupId>
+            <groupId>org.spigotmc.......</groupId>
             <artifactId>spigot-api</artifactId>
             <version>1.9-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.spigotmc.....</groupId>
+            <groupId>org.spigotmc......</groupId>
             <artifactId>spigot-api</artifactId>
             <version>1.9.4-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.spigotmc....</groupId>
+            <groupId>org.spigotmc.....</groupId>
             <artifactId>spigot-api</artifactId>
             <version>1.10.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.spigotmc...</groupId>
+            <groupId>org.spigotmc....</groupId>
             <artifactId>spigot-api</artifactId>
             <version>1.11.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.spigotmc..</groupId>
+            <groupId>org.spigotmc...</groupId>
             <artifactId>spigot-api</artifactId>
             <version>1.12.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.spigotmc.</groupId>
+            <groupId>org.spigotmc..</groupId>
             <artifactId>spigot-api</artifactId>
             <version>1.15.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.spigotmc</groupId>
+            <groupId>org.spigotmc.</groupId>
             <artifactId>spigot-api</artifactId>
             <version>1.16.1-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
+            <version>1.16.5-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
