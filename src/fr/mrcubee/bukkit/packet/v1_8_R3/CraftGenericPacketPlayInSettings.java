@@ -6,7 +6,7 @@ import fr.mrcubee.bukkit.packet.GenericPacketPlayInUpdateSign;
 import fr.mrcubee.bukkit.setting.ChatVisibility;
 import fr.mrcubee.bukkit.setting.MainHand;
 import fr.mrcubee.util.Reflection;
-import net.minecraft.server.v1_8_R1.EnumChatVisibility;
+import net.minecraft.server.v1_8_R3.EnumChatVisibility;
 import net.minecraft.server.v1_8_R3.BlockPosition;
 import net.minecraft.server.v1_8_R3.IChatBaseComponent;
 import net.minecraft.server.v1_8_R3.PacketPlayInSettings;
