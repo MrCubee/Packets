@@ -13,12 +13,12 @@ public final class PacketReceiveEvent extends PacketListenerEvent {
 
     private static final HandlerList handlers = new HandlerList();
 
-    private Player sender;
-    private GenericInPacket packet;
+    private final Player receiver;
+    private final GenericInPacket packet;
 
-    private PacketReceiveEvent(GenericListenerManager manager, Player sender, GenericInPacket packet) {
+    private PacketReceiveEvent(GenericListenerManager manager, Player receiver, GenericInPacket packet) {
         super(manager);
-        this.sender = sender;
+        this.receiver = receiver;
         this.packet = packet;
     }
 
@@ -26,8 +26,8 @@ public final class PacketReceiveEvent extends PacketListenerEvent {
         return this.packet;
     }
 
-    public Player getSender() {
-        return this.sender;
+    public Player getReceiver() {
+        return this.receiver;
     }
 
     @Override
