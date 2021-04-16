@@ -14,7 +14,6 @@ public abstract class PacketListenerEvent extends Event implements Cancellable {
     private final GenericListenerManager manager;
     private boolean cancelled;
 
-
     protected PacketListenerEvent(GenericListenerManager listener) {
         this.manager = listener;
         this.cancelled = false;
