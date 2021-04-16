@@ -2,16 +2,11 @@ package fr.mrcubee.bukkit.packet.v1_8_R3;
 
 import fr.mrcubee.bukkit.Packets;
 import fr.mrcubee.bukkit.packet.GenericPacketPlayInSettings;
-import fr.mrcubee.bukkit.packet.GenericPacketPlayInUpdateSign;
 import fr.mrcubee.bukkit.setting.ChatVisibility;
 import fr.mrcubee.bukkit.setting.MainHand;
 import fr.mrcubee.util.Reflection;
-import net.minecraft.server.v1_8_R3.EnumChatVisibility;
-import net.minecraft.server.v1_8_R3.BlockPosition;
-import net.minecraft.server.v1_8_R3.IChatBaseComponent;
+import net.minecraft.server.v1_8_R3.EntityHuman.EnumChatVisibility;
 import net.minecraft.server.v1_8_R3.PacketPlayInSettings;
-import net.minecraft.server.v1_8_R3.PacketPlayInUpdateSign;
-import org.bukkit.Location;
 
 public class CraftGenericPacketPlayInSettings extends CraftGenericInPacket implements GenericPacketPlayInSettings {
 
